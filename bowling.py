@@ -40,6 +40,9 @@ class BowlingGame:
 
             # Handle strike
             if frame.is_strike():
+                if index == 9:
+                    continue
+
                 next_frame = self.get_frame_at(index + 1)
 
                 if next_frame.is_strike():
