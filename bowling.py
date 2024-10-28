@@ -26,9 +26,7 @@ class BowlingGame:
 
     def calculate_score(self) -> int:
         score = 0
-        index = 0
-
-        for frame in self._frames:
+        for index, frame in enumerate(self._frames):
             score += frame.score()
 
             # Handle spare
@@ -39,9 +37,12 @@ class BowlingGame:
             # Handle strike
             if frame.is_strike():
                 next_frame = self.get_frame_at(index + 1)
-                score += next_frame.score()
 
-            index += 1
+                if next_frame.is_strike():
+                    next_2_frame = self.get_frame_at(index + 2)
+                    score += next_2_frame.get_first_throw()
+
+                score += next_frame.score()
         return score
 
     def set_first_bonus_throw(self, bonus_throw: int) -> None:
