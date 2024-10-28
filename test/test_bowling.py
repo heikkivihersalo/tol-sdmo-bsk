@@ -164,3 +164,21 @@ class TestBowlingGame(unittest.TestCase):
 
         self.assertEqual(92, self.special_game.calculate_score())
 
+    def test_calculate_score_perfect_game(self):
+        self.special_game = BowlingGame()
+
+        self.special_game.add_frame(Frame(10, 0))
+        self.special_game.add_frame(Frame(10, 0))
+        self.special_game.add_frame(Frame(10, 0))
+        self.special_game.add_frame(Frame(10, 0))
+        self.special_game.add_frame(Frame(10, 0))
+        self.special_game.add_frame(Frame(10, 0))
+        self.special_game.add_frame(Frame(10, 0))
+        self.special_game.add_frame(Frame(10, 0))
+        self.special_game.add_frame(Frame(10, 0))
+        self.special_game.add_frame(Frame(10, 0))
+
+        self.special_game.set_first_bonus_throw(10)
+        self.special_game.set_second_bonus_throw(10)
+
+        self.assertEqual(300, self.special_game.calculate_score())
