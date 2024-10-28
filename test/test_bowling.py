@@ -43,3 +43,6 @@ class TestBowlingGame(unittest.TestCase):
 
     def test_game_index_out_of_bounds(self):
         self.assertRaises(BowlingError, self.default_game.get_frame_at, 11)
+
+    def test_calculate_score(self):
+        self.assertEqual(self.default_game.calculate_score(), 81)
