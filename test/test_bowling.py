@@ -52,3 +52,13 @@ class TestBowlingGame(unittest.TestCase):
         game.add_frame(Frame(2, 6))
 
         self.assertRaises(BowlingError, game.add_frame, Frame(3, 6))
+
+    def test_game_index_negative(self):
+        game = BowlingGame()
+
+        self.assertRaises(BowlingError, game.get_frame_at, -1)
+
+    def test_game_index_out_of_bounds(self):
+        game = BowlingGame()
+
+        self.assertRaises(BowlingError, game.get_frame_at, 11)
