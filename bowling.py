@@ -36,6 +36,11 @@ class BowlingGame:
                 next_frame = self.get_frame_at(index + 1)
                 score += next_frame.get_first_throw()
 
+            # Handle strike
+            if frame.is_strike():
+                next_frame = self.get_frame_at(index + 1)
+                score += next_frame.score()
+
             index += 1
         return score
 
