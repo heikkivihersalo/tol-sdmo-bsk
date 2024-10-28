@@ -33,7 +33,7 @@ class TestBowlingGame(unittest.TestCase):
         self.assertRaises(BowlingError, special_game.get_frame_at, 0)
 
     def test_game_created_10_frames(self):
-        self.assertEqual(len(self.default_game._frames), 10)
+        self.assertEqual(10, len(self.default_game._frames))
 
     def test_game_created_11_frames(self):
         self.assertRaises(BowlingError, self.default_game.add_frame, Frame(3, 6))
@@ -45,7 +45,7 @@ class TestBowlingGame(unittest.TestCase):
         self.assertRaises(BowlingError, self.default_game.get_frame_at, 11)
 
     def test_calculate_score(self):
-        self.assertEqual(self.default_game.calculate_score(), 81)
+        self.assertEqual(81, self.default_game.calculate_score())
 
     def test_calculate_score_spare(self):
         self.special_game = BowlingGame()
@@ -61,7 +61,7 @@ class TestBowlingGame(unittest.TestCase):
         self.special_game.add_frame(Frame(8, 1))
         self.special_game.add_frame(Frame(2, 6))
 
-        self.assertEqual(self.special_game.calculate_score(), 88)
+        self.assertEqual(88, self.special_game.calculate_score())
 
     def test_calculate_score_strike(self):
         self.special_game = BowlingGame()
@@ -77,4 +77,36 @@ class TestBowlingGame(unittest.TestCase):
         self.special_game.add_frame(Frame(8, 1))
         self.special_game.add_frame(Frame(2, 6))
 
-        self.assertEqual(self.special_game.calculate_score(), 94)
+        self.assertEqual(94, self.special_game.calculate_score())
+
+    def test_calculate_score_strike_followed_by_spare(self):
+        self.special_game = BowlingGame()
+
+        self.special_game.add_frame(Frame(10, 0))
+        self.special_game.add_frame(Frame(4, 6))
+        self.special_game.add_frame(Frame(7, 2))
+        self.special_game.add_frame(Frame(3, 6))
+        self.special_game.add_frame(Frame(4, 4))
+        self.special_game.add_frame(Frame(5, 3))
+        self.special_game.add_frame(Frame(3, 3))
+        self.special_game.add_frame(Frame(4, 5))
+        self.special_game.add_frame(Frame(8, 1))
+        self.special_game.add_frame(Frame(2, 6))
+
+        self.assertEqual(103, self.special_game.calculate_score())
+
+    def test_calculate_score_strike_followed_by_strike(self):
+        self.special_game = BowlingGame()
+
+        self.special_game.add_frame(Frame(10, 0))
+        self.special_game.add_frame(Frame(10, 0))
+        self.special_game.add_frame(Frame(7, 2))
+        self.special_game.add_frame(Frame(3, 6))
+        self.special_game.add_frame(Frame(4, 4))
+        self.special_game.add_frame(Frame(5, 3))
+        self.special_game.add_frame(Frame(3, 3))
+        self.special_game.add_frame(Frame(4, 5))
+        self.special_game.add_frame(Frame(8, 1))
+        self.special_game.add_frame(Frame(2, 6))
+
+        self.assertEqual(112, self.special_game.calculate_score())
