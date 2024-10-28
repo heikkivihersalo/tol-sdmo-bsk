@@ -21,4 +21,4 @@ class Frame:
         return not self.is_strike() and (self._first_throw + self._second_throw == 10)
 
     def set_bonus(self, bonus_throw: int) -> None:
-        self._bonus_throw = bonus_throw
+        self._bonus_throw += bonus_throw
