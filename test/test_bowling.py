@@ -162,4 +162,5 @@ class TestBowlingGame(unittest.TestCase):
         self.special_game.set_first_bonus_throw(7)
         self.special_game.set_second_bonus_throw(2)
 
+        self.assertEqual(92, self.special_game.calculate_score())
 
