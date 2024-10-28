@@ -26,7 +26,13 @@ class BowlingGame:
 
     def calculate_score(self) -> int:
         score = 0
+        is_perfect_game = True
+
         for index, frame in enumerate(self._frames):
+            # Keep track of perfect game
+            if not frame.is_strike():
+                is_perfect_game = False
+
             # Handle base score
             score += frame.score()
 
@@ -44,12 +50,20 @@ class BowlingGame:
                     continue
 
                 next_frame = self.get_frame_at(index + 1)
+                score += next_frame.score()
 
                 if next_frame.is_strike():
+                    if index == 8 or index == 9:
+                        continue
+
                     next_2_frame = self.get_frame_at(index + 2)
                     score += next_2_frame.get_first_throw()
 
-                score += next_frame.score()
+        # If all frames are strikes then the score is 300
+        if is_perfect_game:
+            return 300
+
+        # All other cases
         return score
 
     def set_first_bonus_throw(self, bonus_throw: int) -> None:
