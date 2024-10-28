@@ -46,3 +46,19 @@ class TestBowlingGame(unittest.TestCase):
 
     def test_calculate_score(self):
         self.assertEqual(self.default_game.calculate_score(), 81)
+
+    def test_calculate_score_spare(self):
+        self.special_game = BowlingGame()
+
+        self.special_game.add_frame(Frame(1, 9))
+        self.special_game.add_frame(Frame(3, 6))
+        self.special_game.add_frame(Frame(7, 2))
+        self.special_game.add_frame(Frame(3, 6))
+        self.special_game.add_frame(Frame(4, 4))
+        self.special_game.add_frame(Frame(5, 3))
+        self.special_game.add_frame(Frame(3, 3))
+        self.special_game.add_frame(Frame(4, 5))
+        self.special_game.add_frame(Frame(8, 1))
+        self.special_game.add_frame(Frame(2, 6))
+
+        self.assertEqual(self.special_game.calculate_score(), 88)
