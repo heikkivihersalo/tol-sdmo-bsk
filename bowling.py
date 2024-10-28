@@ -1,18 +1,17 @@
 from bowling_error import BowlingError
 from frame import Frame
+import random
 
 
 class BowlingGame:
-    frames = []
-
     def __init__(self):
-        pass
+        self._frames = []
 
     def add_frame(self, frame: Frame) -> None:
-        self.frames.append(frame)
+        self._frames.append(frame)
 
     def get_frame_at(self, i: int) -> Frame:
-        pass
+        return self._frames[i]
 
     def calculate_score(self) -> int:
         pass
