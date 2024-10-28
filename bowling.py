@@ -6,8 +6,6 @@ import random
 class BowlingGame:
     def __init__(self):
         self._frames = []
-        self._first_bonus_throw = 0
-        self._second_bonus_throw = 0
 
     def add_frame(self, frame: Frame) -> None:
         if len(self._frames) == 10:
@@ -35,10 +33,10 @@ class BowlingGame:
             # Handle spare
             if frame.is_spare():
                 if index == 9:
-                    score += self._first_bonus_throw
-                else:
-                    next_frame = self.get_frame_at(index + 1)
-                    score += next_frame.get_first_throw()
+                    continue
+
+                next_frame = self.get_frame_at(index + 1)
+                score += next_frame.get_first_throw()
 
             # Handle strike
             if frame.is_strike():
@@ -52,7 +50,7 @@ class BowlingGame:
         return score
 
     def set_first_bonus_throw(self, bonus_throw: int) -> None:
-        self._first_bonus_throw = bonus_throw
+        self._frames[-1].set_bonus(bonus_throw)
 
     def set_second_bonus_throw(self, bonus_throw: int) -> None:
-        self._second_bonus_throw = bonus_throw
+        self._frames[-1].set_bonus(bonus_throw)
