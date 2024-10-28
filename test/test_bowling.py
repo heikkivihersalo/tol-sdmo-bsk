@@ -8,18 +8,31 @@ from frame import Frame
 
 class TestBowlingGame(unittest.TestCase):
     def setUp(self):
-        self.game = BowlingGame()
+        pass
 
     def test_game_created(self):
+        game = BowlingGame()
+
         frame = Frame(1, 2)
-        self.game.add_frame(frame)
-        self.assertEqual(frame, self.game.get_frame_at(0))
+        game.add_frame(frame)
+        self.assertEqual(game.get_frame_at(0), frame)
+
+    def  test_empty_game(self):
+        game = BowlingGame()
+        self.assertRaises(BowlingError, game.get_frame_at, 0)
 
     def test_game_consists_of_10_frames(self):
-        for i in range(10):
-            first_throw = random.randint(0, 10)
-            second_throw = random.randint(0, 10 - first_throw)
+        game = BowlingGame()
 
-            self.game.add_frame(Frame(first_throw, second_throw))
+        game.add_frame(Frame(1, 5))
+        game.add_frame(Frame(3, 6))
+        game.add_frame(Frame(7, 2))
+        game.add_frame(Frame(3, 6))
+        game.add_frame(Frame(4, 4))
+        game.add_frame(Frame(5, 3))
+        game.add_frame(Frame(3, 3))
+        game.add_frame(Frame(4, 5))
+        game.add_frame(Frame(8, 1))
+        game.add_frame(Frame(2, 6))
 
-        self.assertEqual(len(self.game._frames), 10)
+        self.assertEqual(len(game._frames), 10)
